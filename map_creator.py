@@ -59,23 +59,24 @@ def generate_map(name_and_coordinates:dict):
     mp.add_child(markers) 
     mp.add_child(LayerControl()) 
  
-    mp.save('templates/mapapa.html')
+    return mp._repr_html_()
 
 def main():
     response_json = get_json()
     name_and_location = get_screen_name_and_location(response_json)
     name_and_coordinates = get_locations_coordinates(name_and_location)
-    generate_map(name_and_coordinates)
+    maap = generate_map(name_and_coordinates)
+    return maap
 
-# app.run()
+
 
 
 
 
 @app.route("/register",methods =["POST"])
 def register():
-    main()
+    maap = main()
 
-    return render_template("mapapa.html")
+    return maap
 
-
+app.run(debug=True)
