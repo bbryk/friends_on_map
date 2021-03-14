@@ -94,6 +94,8 @@ def main():
 
 @app.route("/register",methods =["POST"])
 def register():
+    if not request.form.get('screen_name') or not request.form.get('bearer_token') or not request.form.get('friends_count'):
+        return render_template('failure.html')
     maap = main()
 
     return maap
